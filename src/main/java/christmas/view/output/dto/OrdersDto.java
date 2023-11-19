@@ -9,10 +9,6 @@ public class OrdersDto {
         this.orders = orders;
     }
 
-    public List<OrderDto> getOrders() {
-        return orders;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

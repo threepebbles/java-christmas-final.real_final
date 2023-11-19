@@ -10,10 +10,6 @@ public class GiftsDto {
         this.gifts = gifts;
     }
 
-    public List<GiftDto> getGifts() {
-        return gifts;
-    }
-
     @Override
     public String toString() {
         if (gifts.isEmpty()) {

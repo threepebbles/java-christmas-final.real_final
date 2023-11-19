@@ -46,7 +46,7 @@ public class GiftEventTest {
                     add(new Order(Menu.CAESAR_SALAD, 2));
                 }}
         );
-
+        // 108000 + 12000 + 16000 >= 120000
         GiftEvent giftEvent = new GiftEvent(orders);
 
         assertThat(giftEvent.calculateDiscountAmount()).isEqualTo(25000);
@@ -60,7 +60,7 @@ public class GiftEventTest {
                     add(new Order(Menu.ZERO_COKE, 3));
                 }}
         );
-
+        // 108000 + 9000 < 120000
         GiftEvent giftEvent = new GiftEvent(orders);
 
         assertThat(giftEvent.calculateDiscountAmount()).isEqualTo(0);
