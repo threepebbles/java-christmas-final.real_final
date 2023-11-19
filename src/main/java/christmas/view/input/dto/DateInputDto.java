@@ -1,19 +1,23 @@
 package christmas.view.input.dto;
 
 import christmas.error.ErrorMessage;
+import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class DateInputDto {
     private final LocalDate localDate;
 
     public DateInputDto(LocalDate localDate) {
-        validateNull(localDate);
         this.localDate = localDate;
     }
 
-    private void validateNull(LocalDate localDate) {
-        if (Objects.isNull(localDate)) {
+    public static DateInputDto createDateInputDTO(String userInput) {
+        try {
+            final int CURRENT_YEAR = 2023;
+            final int CURRENT_MONTH = 12;
+            int day = Integer.parseInt(userInput);
+            return new DateInputDto(LocalDate.of(CURRENT_YEAR, CURRENT_MONTH, day));
+        } catch (DateTimeException | NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.getDateErrorMessage());
         }
     }

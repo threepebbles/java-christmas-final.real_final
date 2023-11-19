@@ -1,27 +1,25 @@
 package christmas.view.input.dto;
 
 import christmas.error.ErrorMessage;
-import java.util.Objects;
+import christmas.util.Parser;
+import java.util.List;
 
 public class OrderInputDto {
     private final String menuName;
     private final int count;
 
     public OrderInputDto(String menuName, int count) {
-        validateBlank(menuName);
-        validatePositiveInteger(count);
         this.menuName = menuName;
         this.count = count;
     }
 
-    private void validateBlank(String menuName) {
-        if (Objects.isNull(menuName) || menuName.isBlank()) {
-            throw new IllegalArgumentException(ErrorMessage.getOrdersErrorMessage());
-        }
-    }
-
-    private void validatePositiveInteger(int count) {
-        if (count <= 0) {
+    public static OrderInputDto createOrderInputDto(String menuCount) {
+        List<String> menuCountBundle = Parser.parseWithDelimiter(menuCount, "-");
+        try {
+            String menuName = menuCountBundle.get(0);
+            int count = Integer.parseInt(menuCountBundle.get(1));
+            return new OrderInputDto(menuName, count);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.getOrdersErrorMessage());
         }
     }

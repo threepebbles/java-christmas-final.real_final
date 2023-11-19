@@ -12,12 +12,6 @@ public class InputView {
     public static final String ENTER_ORDERS_MESSAGE =
             "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)" + LINE_SEPARATOR;
 
-    private final InputDtoConverter inputDTOConverter;
-
-    public InputView(InputDtoConverter inputDTOConverter) {
-        this.inputDTOConverter = inputDTOConverter;
-    }
-
     private String scanDayOfVisit() {
         System.out.print(GREETING_MESSAGE);
         System.out.print(ENTER_DAY_OF_VISIT_MESSAGE);
@@ -27,7 +21,7 @@ public class InputView {
     public DateInputDto askDateInputDto() {
         return (DateInputDto) retryUntilSuccess(() -> {
             String dayOfVisit = scanDayOfVisit();
-            return inputDTOConverter.createDateDTO(dayOfVisit);
+            return DateInputDto.createDateInputDTO(dayOfVisit);
         });
     }
 
@@ -39,7 +33,7 @@ public class InputView {
     public OrdersInputDto askOrdersInputDto() {
         return (OrdersInputDto) retryUntilSuccess(() -> {
             String orders = scanOrders();
-            return inputDTOConverter.createOrdersInputDto(orders);
+            return OrdersInputDto.createOrdersInputDto(orders);
         });
     }
 
