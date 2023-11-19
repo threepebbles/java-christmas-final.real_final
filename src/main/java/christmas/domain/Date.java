@@ -32,13 +32,9 @@ public class Date {
     public static Date createDate(DateInputDto dateInputDTO) {
         return new Date(dateInputDTO.getLocalDate());
     }
-    
+
     public DateDto toDto() {
         return new DateDto(localDate);
-    }
-
-    public LocalDate getLocalDate() {
-        return localDate;
     }
 
     public boolean isBefore(LocalDate deadLine) {
@@ -50,10 +46,18 @@ public class Date {
     }
 
     public boolean isWeekend() {
-        return !isWeekDay();
+        return localDate.getDayOfWeek() == DayOfWeek.FRIDAY || localDate.getDayOfWeek() == DayOfWeek.SATURDAY;
     }
 
     public boolean isWeekDay() {
-        return localDate.getDayOfWeek() == DayOfWeek.FRIDAY || localDate.getDayOfWeek() == DayOfWeek.SATURDAY;
+        return !isWeekend();
+    }
+
+    public int getDay() {
+        return localDate.getDayOfMonth();
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 }

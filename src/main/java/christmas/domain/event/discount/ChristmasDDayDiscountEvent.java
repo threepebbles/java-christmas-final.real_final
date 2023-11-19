@@ -2,7 +2,6 @@ package christmas.domain.event.discount;
 
 import christmas.domain.Date;
 import java.time.LocalDate;
-import java.time.Period;
 
 public class ChristmasDDayDiscountEvent implements DiscountEvent {
     public static final int DEFAULT_DISCOUNT = 1000;
@@ -24,7 +23,7 @@ public class ChristmasDDayDiscountEvent implements DiscountEvent {
     @Override
     public int calculateDiscountAmount() {
         if (isQualified()) {
-            return DEFAULT_DISCOUNT + Period.between(date.getLocalDate(), DEAD_LINE).getDays() * DISCOUNT_PER_DAY;
+            return DEFAULT_DISCOUNT + (date.getDay() - 1) * DISCOUNT_PER_DAY;
         }
         return 0;
     }

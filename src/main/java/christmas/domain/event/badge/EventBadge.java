@@ -20,7 +20,7 @@ public enum EventBadge {
         return new EventBadgeDto(name);
     }
 
-    public boolean isGreaterOrEqualThanThreshold(int totalDiscount) {
+    public boolean isNotLessThanThreshold(int totalDiscount) {
         return totalDiscount >= threshold;
     }
 }
