@@ -10,8 +10,6 @@ import christmas.view.output.dto.OrdersDto;
 import java.util.function.Consumer;
 
 public class OutputView {
-    public static final String LINE_SEPARATOR = System.lineSeparator();
-
     public void printEventPlan(EventPlanDto eventPlanDTO) {
         printWithLineSeparator(this::printEventPlanHeaderScreen, eventPlanDTO.getDateDto(), 1);
         printWithLineSeparator(this::printOrdersScreen, eventPlanDTO.getOrdersDTO(), 1);

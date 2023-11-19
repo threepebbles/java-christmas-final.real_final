@@ -3,7 +3,6 @@ package christmas.domain;
 import christmas.error.ErrorMessage;
 import christmas.view.input.dto.OrdersInputDto;
 import christmas.view.output.dto.OrdersDto;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Orders {
@@ -33,14 +32,11 @@ public class Orders {
     }
 
     public static Orders createOrders(OrdersInputDto ordersInputDTO) {
-        return new Orders(new ArrayList<>() {{
-            ordersInputDTO.getOrders().forEach(orderInputDTO ->
-                    add(new Order(
-                            Menu.findMenuByName(orderInputDTO.getMenuName()),
-                            orderInputDTO.getCount())
-                    )
-            );
-        }});
+        return new Orders(
+                ordersInputDTO.getOrders().stream()
+                        .map(Order::createOrder)
+                        .toList()
+        );
     }
 
     public OrdersDto toDto() {

@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.error.ErrorMessage;
+import christmas.view.input.dto.OrderInputDto;
 import christmas.view.output.dto.OrderDto;
 
 public class Order {
@@ -26,6 +27,12 @@ public class Order {
         if (Menu.findMenuByName(menuName) == Menu.NOTHING) {
             throw new IllegalArgumentException(ErrorMessage.getOrdersErrorMessage());
         }
+    }
+
+    public static Order createOrder(OrderInputDto orderInputDTO) {
+        return new Order(
+                Menu.findMenuByName(orderInputDTO.getMenuName()),
+                orderInputDTO.getCount());
     }
 
     public OrderDto toDto() {
